@@ -1,0 +1,192 @@
+*Paresse> :t trouNoir
+trouNoir :: t
+*Paresse> trouNoir
+^CInterrupted.
+*Paresse> ex3
+1
+*Paresse> ex4
+^CInterrupted.
+*Paresse> ex5
+1
+*Paresse> ex6
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:30:15 in main:Paresse
+*Paresse> ex7
+^CInterrupted.
+*Paresse> ex7
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:37:25 in main:Paresse
+*Paresse> ex8
+12
+*Paresse> ex9
+12
+*Paresse> ex10
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:40:28 in main:Paresse
+*Paresse> ex11
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:46:8 in main:Paresse
+*Paresse> ex12
+False
+*Paresse> ex13
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:48:17 in main:Paresse
+*Paresse> ex14
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:49:18 in main:Paresse
+*Paresse> ex15
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:51:8 in main:Paresse
+*Paresse> ex16
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:52:8 in main:Paresse
+*Paresse> ex17
+*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:53:16 in main:Paresse
+*Paresse> ex18
+False
+*Paresse> boum
+[1,2,*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:63:15 in main:Paresse
+*Paresse> boum'
+[1,2,*** Exception: Prelude.undefined
+CallStack (from HasCallStack):
+  error, called at libraries/base/GHC/Err.hs:79:14 in base:GHC.Err
+  undefined, called at Parsesse.hs:64:16 in main:Paresse
+*Paresse> :print long
+long = (_t1::[Integer])
+*Paresse> :sprint long
+long = _
+*Paresse> quatre
+4
+*Paresse> :print long
+long = 0 : 1 : 2 : 3 : 4 : (_t2::[Integer])
+*Paresse> :sprint uns
+uns = _
+*Paresse> uns !! 0
+1
+*Paresse> :sprint uns
+uns = 1 : _
+*Paresse> uns !! 1
+1
+*Paresse> :sprint uns
+^CInterrupted.
+*Paresse> :sprint uns'
+uns' = _
+*Paresse> :sprint uns''
+uns'' = _
+*Paresse> uns' !! 0
+1
+*Paresse> uns'' !! 0
+1
+*Paresse> :sprint uns'
+^CInterrupted.
+*Paresse> :sprint uns''
+uns'' = 1 : _
+*Paresse> uns'' !! 1
+1
+*Paresse> :sprint uns''
+uns'' = 1 : 1 : _
+*Paresse> :print fibo
+fibo = (_t1::[Integer])
+*Paresse> head fibo
+1
+*Paresse> :print fibo
+fibo = 1 : (_t2::[Integer])
+*Paresse> fibo !! 4
+5
+*Paresse> :sprint fibo
+fibo = 1 : 1 : 2 : 3 : 5 : _
+*Paresse> length (take 50 fibo)
+50
+*Paresse> :sprint fibo
+fibo = 1 : 1 : 2 : 3 : 5 : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ :
+       _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ :
+       _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ :
+       _ : _
+*Paresse> :set +s
+*Paresse> fibo !! 100000
+420269270299515438…
+(0.53 secs, 476,717,056 bytes)
+*Paresse> fibo !! 100000
+420269270299515438…
+(0.10 secs, 18,375,256 bytes)
+*Paresse> fibo !! 100000
+420269270299515438…
+(0.10 secs, 18,374,712 bytes)
+*Paresse> :sprint plus1
+plus1 = _
+*Paresse> :print plus1
+plus1 = (_t1::[Integer])
+*Paresse> plus1 !! 10
+11
+(0.01 secs, 71,960 bytes)
+*Paresse> :sprint plus1
+plus1 = _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : 11 : _
+*Paresse> :r
+[1 of 1] Compiling Paresse          ( Paresse.hs, interpreted )
+Ok, modules loaded: Paresse.
+*Paresse> :sprint plus1
+plus1 = _
+*Paresse> douze
+12
+(0.01 secs, 68,328 bytes)
+*Paresse> :sprint plus1
+plus1 = _
+*Paresse> :sprint plus1
+plus1 = _
+*Paresse> douze
+12
+(0.01 secs, 68,352 bytes)
+*Paresse> :sprint plus1
+plus1 = _
+*Paresse> douze'
+12
+(0.01 secs, 78,296 bytes)
+*Paresse> :sprint plus1
+plus1 = _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ : _ :
+        _ : _ : _ : _ : _ : 21 : _
+*Paresse> :type seq
+seq :: a -> b -> b
+*Paresse> :r
+[1 of 1] Compiling Paresse          ( Paresse.hs, interpreted )
+Ok, modules loaded: Paresse.
+*Paresse> premiers
+[2,3,5,7,11,13,17,19,23,29,31,37,^CInterrupted.
+*Paresse> premiers !! 4000
+37831
+(2.50 secs, 1,362,488,720 bytes)
+*Paresse> premiers !! 4000
+37831
+(0.01 secs, 76,736 bytes)
+*Paresse> :r
+[1 of 1] Compiling Paresse          ( Paresse.hs, interpreted )
+Ok, modules loaded: Paresse.
+*Paresse> ex21
+[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509,521,523,541,547,557,563,569,571,577,587,593,599,601,607,613,617,619,631,641,643,647,653,659,661,673,677,683,691,701,709,719,727,733,739,743,751,757,761,769,773,787,797,809,811,821,823,827,829,839,853,857,859,863,877,881,883,887,907,911,919,929,937,941,947,953,967,971,977,983,991,997]
+(0.02 secs, 3,629,024 bytes)
+*Paresse> readFile "Paresse.hs"
+"module Paresse where\n\nimport System.Environment\n\ncarre n = n * n\n\nex1 = carre (1+2)\n\n-- \201valuation stricte, ou appel par valeur (call by value)\n-- \201valuation des arguments avant de faire un appel de fonction\n-- carre (1+2) = carre 3\n--             = 3 * 3\n--             = 9\n\n-- \201valuation non-stricte, en l\8217occurrence appel par nom (call by name)\n-- carre (1+2) = (1+2) * (1+2)\n--             = 3 * (1+2)\n--             = 3 * 3\n--             = 9\n\n-- 9 est dit _forme normale_, une expression qu\8217on ne peut plus simplifier\n\n\ntrouNoir = trouNoir\n\nex2 = trouNoir\n\nex3 = fst (1, trouNoir)\nex4 = snd (1, trouNoir)\n\nex5 = fst (1, undefined)\nex6 = snd (1, undefined)\n\n\nifThenElse :: Bool -> a -> a -> a\nifThenElse True  t _ = t\nifThenElse False _ e = e\n\nex7  = ifThenElse True  undefined 12\nex8  = ifThenElse False undefined 12\nex9  = ifThenElse True  12 undefined\nex10 = ifThenElse False 12 undefined\n\n(&&&) :: Bool -> Bool -> Bool\n_ &&& False = False\nb &&& True  = b\n\nex11 = undefined &&& True\nex12 = undefined &&& False\nex13 = True &&& undefined\nex14 = False &&& undefined\n\nex15 = undefined && True\nex16 = undefined && False\nex17 = True && undefined\nex18 = False && undefined\n\n\n-- \201valuation dite paresseuse, ou appel par n\233cessit\233\n-- Fermeture = code + environnement\n-- carre (1+2) = let n = 1+2 in n * n\n--             = let n = 3   in n * n\n--             = 9\n\nboum = [1, 2, undefined]\nboum' = [1, 2, undefined, 4]\n\nlong = [0..100000]\nquatre = long !! 4\n\nuns = 1 : uns\nuns' = repeat 1\nuns'' = iterate id 1\n\nfibo :: [Integer]\nfibo = 1 : 1 : zipWith (+) fibo (tail fibo)\n\nmainFibo :: IO ()\nmainFibo = do (n: _) <- getArgs\n              print (fibo !! read n)\n\nplus1 = map (1+) [0..]\n\ndouze = let _ = plus1 !! 20\n        in  12\n\ndouze' = (plus1 !! 20) `seq` 12\n\n\n-- Gain en modularit\233\ncontrole = take 50\ndonnees  = [1..]\n\nprogramme = controle donnees\n\npremiers :: [Integer]\npremiers = crible [2..]\n    where crible (p:ns) = p : crible (filter (\\n -> n `mod` p /= 0) ns)\n\n-- avec du contr\244le\nex19 = premiers !! 4000\nex20 = take 10 premiers\nex21 = takeWhile (< 1000) premiers\n"
+(0.02 secs, 2,141,824 bytes)
+*Paresse> mainIO
+*** Exception: /tmp/test: openFile: resource busy (file is locked)

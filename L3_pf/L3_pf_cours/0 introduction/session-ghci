@@ -1,0 +1,48 @@
+Prelude> 2 + 3
+5
+Prelude> 2 + 3 * 4
+14
+Prelude> (2 + 3) * 4
+20
+Prelude> sqrt ((3 ^ 2) + (4 ^ 2))
+5.0
+Prelude> sqrt 3 ^ 2 + 4 ^ 2
+19.0
+Prelude> (sqrt 3) ^ 2 + 4 ^ 2
+19.0
+Prelude> :?
+[…]
+Prelude> :info (+)
+class Num a where
+  (+) :: a -> a -> a
+  ...
+        -- Defined in ‘GHC.Num’
+infixl 6 +
+Prelude> :info (^)
+(^) :: (Num a, Integral b) => a -> b -> a       -- Defined in ‘GHC.Real’
+infixr 8 ^
+Prelude> head [1,2,3,4]
+1
+Prelude> tail [1,2,3,4]
+[2,3,4]
+Prelude> take 3 [1,2,3,4]
+[1,2,3]
+Prelude> drop 3 [1,2,3,4]
+[4]
+Prelude> length [1,2,3,4]
+4
+Prelude> sum [1,2,3,4],4]
+10
+Prelude> product [1,2,3,4]]
+24
+Prelude> [1,2,3,4] ++ [5,6,7]
+[1,2,3,4,5,6,7]
+Prelude> reverse [1,2,3,4],7]
+[4,3,2,1]
+Prelude> :l exemples.hs
+[1 of 1] Compiling Exemples         ( exemples.hs, interpreted )
+Ok, modules loaded: Exemples.
+*Exemples> quadruple 12
+48
+*Exemples> take (double 2) [1..10]
+[1,2,3,4]

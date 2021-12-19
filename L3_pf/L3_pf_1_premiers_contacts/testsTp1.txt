@@ -1,0 +1,86 @@
+--------- Instruction --------------
+Lancer le program 
+> ghci
+
+Executer le fichier .hs
+> :l answersTp1.hs
+
+--------- Tests --------------
+% Q1
+*Main> somme1 4
+10
+
+% Q3
+*Main> sommeDeXaY 3 5
+12
+
+% Q4
+*Main> somme2 [1,2,3]
+6
+
+% Q5
+*Main> m_last [1,2,3,5]
+5
+
+*Main> m_init [1,2,3,4,5,6,7]
+[1,2,3,4,5,6]
+
+
+% Q6 (en utilisant du filtrage de motifs )
+*Main> "abcdef" !!! 3
+'d'
+*Main> [1,2,3,4] !!! 3
+4
+
+*Main> [1,2,3] +++ [4,5,6]
+[1,2,3,4,5,6]
+*Main> "abc" +++ "def"
+"abcdef"
+
+*Main> concat' [[1,2],[3,4]]
+[1,2,3,4]
+*Main> concat' ["abc","def"]
+"abcdef"
+
+*Main> map' (*2) [1,2,3]
+[2,4,6]
+*Main> map' (\i-> i*i) [1,2,3]
+[1,4,9]
+
+
+% Q6 (en utilisant des fonctions de base)
+*Main> m_recup "abcdef" 3
+'d'
+
+*Main> m_append [1,2,3] [4,5,6]
+[1,2,3,4,5,6]
+*Main> m_append "abcd" "efgh"
+"abcdefgh"
+
+*Main> m_concat [["abcd"],["efgh"]]
+["abcd","efgh"]
+*Main> m_concat [[1,2,3],[4,5,6]]
+[1,2,3,4,5,6]
+
+*Main> m_map (*2) [1,2,3]
+[2,4,6]
+*Main> m_map (\i-> i*i) [1,2,3]
+[1,4,9]
+
+% Q8
+*Main> m_len "abcd"
+4
+*Main> m_len ['a', 'b', 'c', 'd']
+4
+
+% Q9
+*Main> function9 (\i-> i+1) 1 3
+[1,2,3]
+*Main> function9 (\i-> "a"++i) "b" 3
+["b","ab","aab"]
+
+% Q10
+*Main> function10 20
+[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+*Main> function10 10
+[1,2,3,4,5,6,7,8,9,10]

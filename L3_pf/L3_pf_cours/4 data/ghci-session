@@ -1,0 +1,139 @@
+Prelude> :l types.hs
+[1 of 1] Compiling DéclarationTypes ( types.hs, interpreted )
+Ok, modules loaded: DéclarationTypes.
+*DéclarationTypes> ex1
+
+<interactive>:4:1: error:
+    • No instance for (Show Bool') arising from a use of ‘print’
+    • In a stmt of an interactive GHCi command: print it
+*DéclarationTypes> :r
+[1 of 1] Compiling DéclarationTypes ( types.hs, interpreted )
+Ok, modules loaded: DéclarationTypes.
+*DéclarationTypes> Vrai
+Vrai
+*DéclarationTypes> show' Vrai
+"Vrai"
+*DéclarationTypes> Paire 12 34
+Paire 12 34
+*DéclarationTypes> :set +t
+*DéclarationTypes> Paire 12 34
+Paire 12 34
+it :: TupleEntiers
+*DéclarationTypes> :type Paire
+Paire :: Int -> Int -> TupleEntiers
+*DéclarationTypes> Triplet 12 34 56
+Triplet 12 34 56
+it :: TupleEntiers
+*DéclarationTypes> Paire 12 34 == Paire 12 34
+
+<interactive>:18:1: error:
+    • No instance for (Eq TupleEntiers) arising from a use of ‘==’
+    • In the expression: Paire 12 34 == Paire 12 34
+      In an equation for ‘it’: it = Paire 12 34 == Paire 12 34
+*DéclarationTypes> :r
+[1 of 1] Compiling DéclarationTypes ( types.hs, interpreted )
+Ok, modules loaded: DéclarationTypes.
+*DéclarationTypes> Paire 12 34 == Paire 12 34
+True
+it :: Bool
+*DéclarationTypes> Paire 12 34 == Triplet 12 34 56
+False
+it :: Bool
+*DéclarationTypes> ex2
+[Oui,Non,PtetBenQuOuiPtetBenQuNon]
+it :: [Réponse]
+*DéclarationTypes> commenceParA "Abc"
+True
+it :: Bool
+*DéclarationTypes> commenceParA "abc"
+False
+it :: Bool
+*DéclarationTypes> commenceParA ""
+*** Exception: Prelude.head: empty list
+*DéclarationTypes> commenceParA' ""
+False
+it :: Bool
+*DéclarationTypes> ex4
+Vide
+it :: Liste a
+*DéclarationTypes> ex5
+Cons 1 Vide
+it :: Liste Integer
+*DéclarationTypes> ex6
+Cons 2 (Cons 1 Vide)
+it :: Liste Integer
+*DéclarationTypes> ex7
+1 :- Vide'
+it :: Liste' Integer
+*DéclarationTypes> :r
+[1 of 1] Compiling DéclarationTypes ( types.hs, interpreted )
+
+types.hs:127:7: error:
+    • Ambiguous type variable ‘a0’ arising from the literal ‘1’
+      prevents the constraint ‘(Num a0)’ from being solved.
+      Relevant bindings include
+        ex9 :: Liste' (Liste' a0) (bound at types.hs:127:1)
+      Probable fix: use a type annotation to specify what ‘a0’ should be.
+      These potential instances exist:
+        instance Num Integer -- Defined in ‘GHC.Num’
+        instance Num Double -- Defined in ‘GHC.Float’
+        instance Num Float -- Defined in ‘GHC.Float’
+        ...plus two others
+        ...plus four instances involving out-of-scope types
+        (use -fprint-potential-instances to see them all)
+    • In the first argument of ‘(:-)’, namely ‘1’
+      In the first argument of ‘(:-)’, namely ‘1 :- 2’
+      In the expression: 1 :- 2 :- Vide'
+
+types.hs:127:12: error:
+    • No instance for (Num (Liste' a0)) arising from the literal ‘2’
+    • In the second argument of ‘(:-)’, namely ‘2’
+      In the first argument of ‘(:-)’, namely ‘1 :- 2’
+      In the expression: 1 :- 2 :- Vide'
+Failed, modules loaded: none.
+Prelude> :info (:)
+data [] a = ... | a : [a]       -- Defined in ‘GHC.Types’
+infixr 5 :
+*DéclarationTypes> :info (:-)
+data Liste' a = ... | a :- (Liste' a)
+        -- Defined at types.hs:122:17
+*DéclarationTypes> :r
+[1 of 1] Compiling DéclarationTypes ( types.hs, interpreted )
+Ok, modules loaded: DéclarationTypes.
+*DéclarationTypes> ex9
+1 :- (2 :- Vide')
+it :: Liste' Integer
+*DéclarationTypes> ex9
+1 :- (2 :- Vide')
+it :: Liste' Integer
+*DéclarationTypes> :i (+)
+class Num a where
+  (+) :: a -> a -> a
+  ...
+        -- Defined in ‘GHC.Num’
+infixl 6 +
+*DéclarationTypes> 1 + 2 : []
+[3]
+it :: Num a => [a]
+*DéclarationTypes> ex11
+Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Cons' 1 (Interrupted.
+*DéclarationTypes> :info Arbre
+data Arbre a = Noeud a [Arbre a]        -- Defined at types.hs:146:1
+instance [safe] Eq a => Eq (Arbre a) -- Defined at types.hs:147:21
+instance [safe] Ord a => Ord (Arbre a)
+  -- Defined at types.hs:147:25
+instance [safe] Read a => Read (Arbre a)
+  -- Defined at types.hs:147:30
+instance [safe] Show a => Show (Arbre a)
+  -- Defined at types.hs:147:15
+*DéclarationTypes> ex12
+Noeud 1 []
+it :: Arbre Integer
+*DéclarationTypes> ex13
+Noeud 12 [Noeud 1 [],Noeud 1 [],Noeud 12 [Noeud 1 [],Noeud 1 [],Noeud 12 [Noeud 1 [],Noeud 1 [],Noeud 12 [Interrupted.
+*DéclarationTypes> zipWith (+) [1..2] [10..11]
+[11,13]
+it :: (Enum c, Num c) => [c]
+*DéclarationTypes> zipWith (+) [1..2] [10..]
+[11,13]
+it :: (Enum c, Num c) => [c]

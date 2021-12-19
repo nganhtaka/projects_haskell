@@ -1,0 +1,80 @@
+*AnalyseGrammaticale> :type MkParser
+MkParser :: (String -> Resultat a) -> Parser a
+*AnalyseGrammaticale> runParser unCaractereQuelconque ""
+Nothing
+*AnalyseGrammaticale> runParser unCaractereQuelconque "a"
+Just ('a',"")
+*AnalyseGrammaticale> runParser unCaractereQuelconque "abc"
+Just ('a',"bc")
+*AnalyseGrammaticale> runParser unCaractereQuelconque "abcdef"
+Just ('a',"bcdef")
+*AnalyseGrammaticale> runParser empty ""
+Nothing
+*AnalyseGrammaticale> runParser empty "a"
+Nothing
+*AnalyseGrammaticale> runParser empty "abc"
+Nothing
+*AnalyseGrammaticale> runParser (pure 12) "abc"
+Just (12,"abc")
+*AnalyseGrammaticale> runParser (pure 12) ""
+Just (12,"")
+*AnalyseGrammaticale> :type (<|>)
+(<|>) :: Parser a -> Parser a -> Parser a
+*AnalyseGrammaticale> runParser (pure 12 <|> pure 14) ""
+Just (12,"")
+*AnalyseGrammaticale> runParser (empty <|> pure 14) ""
+Just (14,"")
+*AnalyseGrammaticale> runParser (unCaractereQuelconque <|> pure 'a') ""
+Just ('a',"")
+*AnalyseGrammaticale> runParser (unCaractereQuelconque <|> pure 'a') "bcd"
+Just ('b',"cd")
+*AnalyseGrammaticale> ex1
+Nothing
+*AnalyseGrammaticale> ex2
+Just ('1',"23")
+*AnalyseGrammaticale> ex3
+Nothing
+*AnalyseGrammaticale> runParser (car 'a') "abc"
+Just ('a',"bc")
+*AnalyseGrammaticale> runParser (car 'a') "123"
+Nothing
+*AnalyseGrammaticale> runParser (car 'a') ""
+Nothing
+*AnalyseGrammaticale> runParser (chaine "ab") ""
+Nothing
+*AnalyseGrammaticale> runParser (chaine "ab") "a"
+Nothing
+*AnalyseGrammaticale> runParser (chaine "ab") "ab"
+Just ("ab","")
+*AnalyseGrammaticale> runParser (chaine "ab") "abc"
+Just ("ab","c")
+*AnalyseGrammaticale> runParser (chaine "ab") "abcd"
+Just ("ab","cd")
+*AnalyseGrammaticale> ex4
+Nothing
+*AnalyseGrammaticale> ex5
+Nothing
+*AnalyseGrammaticale> ex6
+Just ("123","")
+*AnalyseGrammaticale> ex7
+Just ("123","abc")
+*AnalyseGrammaticale> ex8
+Just ("123","abc456")
+*AnalyseGrammaticale> ex9
+Nothing
+*AnalyseGrammaticale> ex10
+Nothing
+*AnalyseGrammaticale> ex11
+Just (123,"")
+*AnalyseGrammaticale> ex12
+Just (123,"abc")
+*AnalyseGrammaticale> ex13
+Just (123,"abc456")
+*AnalyseGrammaticale> ex14
+Nothing
+*AnalyseGrammaticale> ex15
+Just (Nombre 1,"")
+*AnalyseGrammaticale> ex16
+Just (Add (Nombre 1) (Nombre 2),"")
+*AnalyseGrammaticale> ex17
+Just (Add (Nombre 1) (Add (Nombre 2) (Nombre 3)),"")

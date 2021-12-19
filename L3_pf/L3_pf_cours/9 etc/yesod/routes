@@ -1,0 +1,6 @@
+/                   HomeR        GET
+/add/#Int/#Int      AddR         GET
+/factorielle/#Int   FactorielleR GET
+/form	            FormR        GET
+/person	            PersonR      POST
+/static             StaticR Static getStatic

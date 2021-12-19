@@ -1,0 +1,61 @@
+*Combinateurs> ex3
+12
+*Combinateurs> ex4
+[1,2,3,4,5,6,7,8,9,10]
+*Combinateurs> ex5
+["ghi","abcde"]
+*Combinateurs> ex6
+["edcba","ihg"]
+*Combinateurs> ex7
+[1,2,3,4,5,6,7,8,9,10,11]
+*Combinateurs> ex8
+[[1,2,3,4,5,6,7,8,9,10,11],[13,14,15,16,17,18,19,20,21]]
+*Combinateurs> :info (+)
+class Num a where
+  (+) :: a -> a -> a
+  ...
+        -- Defined in ‘GHC.Num’
+infixl 6 +
+*Combinateurs> :t ex8
+ex8 :: [[Integer]]
+*Combinateurs> :t ex8'
+ex8' :: Num a => [a] -> [a]
+*Combinateurs> :t and
+and :: Foldable t => t Bool -> Bool
+*Combinateurs> ex10
+True
+*Combinateurs> ex11
+False
+*Combinateurs> :t and
+and :: Foldable t => t Bool -> Bool
+*Combinateurs> ex12
+"bcde"
+*Combinateurs> ex12
+"bcde"
+*Combinateurs> ex13
+[2,4,6,8,10,12,14,16,18,20]
+*Combinateurs> :info (<)
+class Eq a => Ord a where
+  ...
+  (<) :: a -> a -> Bool
+  ...
+        -- Defined in ‘GHC.Classes’
+infix 4 <
+*Combinateurs> ex14
+[10,9,8,7,6,5,4,3,2,1,0]
+*Combinateurs> ex15
+[1,2,4]
+*Combinateurs> :t ex16
+ex16 :: Ord a => [a] -> [a]
+*Combinateurs> :t compare
+compare :: Ord a => a -> a -> Ordering
+*Combinateurs> ex17
+55
+*Combinateurs> ex17
+3
+*Combinateurs> longueur [1..10]
+10
+*Combinateurs> ex18
+65536
+*Combinateurs> ex19
+256

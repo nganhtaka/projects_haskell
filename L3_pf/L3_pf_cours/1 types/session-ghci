@@ -1,0 +1,285 @@
+Prelude> 1 + False
+
+<interactive>:1:1: error:
+    • No instance for (Num Bool) arising from a use of ‘+’
+    • In the expression: 1 + False
+      In an equation for ‘it’: it = 1 + False
+Prelude> False
+False
+Prelude> :set +t
+Prelude> False
+False
+it :: Bool
+Prelude> True
+True
+it :: Bool
+Prelude> 'a'
+'a'
+it :: Char
+Prelude> 'λ'
+'\955'
+it :: Char
+Prelude> 12
+12
+it :: Num t => t
+Prelude> 12 :: Int
+12
+it :: Int
+Prelude> maxBound :: Int
+9223372036854775807
+it :: Int
+Prelude> 9223372036854775807 + 1 :: Int
+-9223372036854775808
+it :: Int
+Prelude> minBound :: Int
+-9223372036854775808
+it :: Int
+Prelude> 9223372036854775807 + 1 :: Integer
+9223372036854775808
+it :: Integer
+Prelude> maxBound :: Integer
+
+<interactive>:14:1: error:
+    • No instance for (Bounded Integer)
+        arising from a use of ‘maxBound’
+    • In the expression: maxBound :: Integer
+      In an equation for ‘it’: it = maxBound :: Integer
+Prelude> 1.2 :: Float
+1.2
+it :: Float
+Prelude> 1.2 :: Double
+1.2
+it :: Double
+Prelude> []
+[]
+it :: [t]
+Prelude> [12]
+[12]
+it :: Num t => [t]
+Prelude> [12.23] :: [Double]
+[12.23]
+it :: [Double]
+Prelude> [12.23] :: [Int]
+
+<interactive>:20:2: error:
+    • No instance for (Fractional Int) arising from the literal ‘12.23’
+    • In the expression: 12.23
+      In the expression: [12.23] :: [Int]
+      In an equation for ‘it’: it = [12.23] :: [Int]
+Prelude> [12.23 :: Float, 12.23 :: Double]
+
+<interactive>:21:18: error:
+    • Couldn't match expected type ‘Float’ with actual type ‘Double’
+    • In the expression: 12.23 :: Double
+      In the expression: [12.23 :: Float, 12.23 :: Double]
+      In an equation for ‘it’: it = [12.23 :: Float, 12.23 :: Double]
+Prelude> "abcλ"
+"abc\955"
+it :: [Char]
+Prelude> "abcλ" :: String
+"abc\955"
+it :: String
+Prelude> putStrLn ['a','b']
+ab
+it :: ()
+Prelude> putStrLn "ab"
+ab
+it :: ()
+Prelude> \n -> [1..n] == enumFromTo 1 n
+
+<interactive>:26:1: error:
+    • No instance for (Show (a0 -> Bool)) arising from a use of ‘print’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command: print it
+Prelude> (1,2,"a")
+(1,2,"a")
+it :: (Num t, Num t1) => (t1, t, [Char])
+Prelude> ('a','b',"cde")
+('a','b',"cde")
+it :: (Char, Char, [Char])
+Prelude> :l types.hs
+[1 of 1] Compiling Types            ( types.hs, interpreted )
+Ok, modules loaded: Types.
+*Types> add (1,2)
+3
+it :: Int
+*Types> zeroTo 12
+[0,1,2,3,4,5,6,7,8,9,10,11,12]
+it :: [Int]
+*Types> :reload
+[1 of 1] Compiling Types            ( types.hs, interpreted )
+Ok, modules loaded: Types.
+*Types> duplique 12
+(12,12)
+it :: (Int, Int)
+*Types> :r
+[1 of 1] Compiling Types            ( types.hs, interpreted )
+Ok, modules loaded: Types.
+*Types> add' 12 34
+46
+it :: Int
+*Types> :r
+[1 of 1] Compiling Types            ( types.hs, interpreted )
+Ok, modules loaded: Types.
+*Types> add' 12
+
+<interactive>:37:1: error:
+    • No instance for (Show (Int -> Int)) arising from a use of ‘print’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command: print it
+*Types> :type add' 12
+add' 12 :: Int -> Int
+*Types> :type ex1
+ex1 :: Int -> Int
+*Types> ex1 34
+46
+it :: Int
+*Types> take 5 [1..10]
+[1,2,3,4,5]
+it :: (Enum a, Num a) => [a]
+*Types> :type take 5
+take 5 :: [a] -> [a]
+*Types> :type head
+head :: [a] -> a
+*Types> :type tail
+tail :: [a] -> [a]
+*Types> zip [1..10] "abcdef"
+[(1,'a'),(2,'b'),(3,'c'),(4,'d'),(5,'e'),(6,'f')]
+it :: (Enum a, Num a) => [(a, Char)]
+*Types> :type zip
+zip :: [a] -> [b] -> [(a, b)]
+*Types> :r
+[1 of 1] Compiling Types            ( types.hs, interpreted )
+
+types.hs:49:7: error: Variable not in scope: xs :: [a]
+Failed, modules loaded: none.
+Prelude> :r
+[1 of 1] Compiling Types            ( types.hs, interpreted )
+Ok, modules loaded: Types.
+*Types> :type ex6
+ex6 :: [a] -> a
+*Types> ex6 [0..]
+12
+it :: (Enum a, Num a) => a
+*Types> :type head
+head :: [a] -> a
+*Types> head []
+*** Exception: Prelude.head: empty list
+*Types> take 5 []
+[]
+it :: [a]
+*Types> tail []
+*** Exception: Prelude.tail: empty list
+*Types> drop 5 []
+[]
+it :: [a]
+*Types> drop 5 [0..3]
+[]
+it :: (Enum a, Num a) => [a]
+*Types> 1 + 2
+3
+it :: Num a => a
+*Types> 1 + 2.3
+3.3
+it :: Fractional a => a
+*Types> :type (+)
+(+) :: Num a => a -> a -> a
+*Types> sum [1, 2, 3]
+6
+it :: Num a => a
+*Types> sum [1.1, 2.2]
+3.3000000000000003
+it :: Fractional a => a
+*Types> 1 + False
+
+<interactive>:62:1: error:
+    • No instance for (Num Bool) arising from a use of ‘+’
+    • In the expression: 1 + False
+      In an equation for ‘it’: it = 1 + False
+*Types> True + False
+
+<interactive>:63:1: error:
+    • No instance for (Num Bool) arising from a use of ‘+’
+    • In the expression: True + False
+      In an equation for ‘it’: it = True + False
+*Types> sum ['a', 'b']
+
+<interactive>:64:1: error:
+    • No instance for (Num Char) arising from a use of ‘sum’
+    • In the expression: sum ['a', 'b']
+      In an equation for ‘it’: it = sum ['a', 'b']
+*Types> :type sum
+sum :: (Num a, Foldable t) => t a -> a
+*Types> :type sum :: Num a => [a] -> a
+sum :: Num a => [a] -> a :: Num a => [a] -> a
+*Types> :type (==)
+(==) :: Eq a => a -> a -> Bool
+*Types> 'a' == 12
+
+<interactive>:68:8: error:
+    • No instance for (Num Char) arising from the literal ‘12’
+    • In the second argument of ‘(==)’, namely ‘12’
+      In the expression: 'a' == 12
+      In an equation for ‘it’: it = 'a' == 12
+*Types> 'a' == 'b'
+False
+it :: Bool
+*Types> ex2 == ex4
+
+<interactive>:70:8: error:
+    • Occurs check: cannot construct the infinite type: a0 ~ [a0]
+      Expected type: [a0] -> [a0]
+        Actual type: [a0] -> a0
+    • In the second argument of ‘(==)’, namely ‘ex4’
+      In the expression: ex2 == ex4
+      In an equation for ‘it’: it = ex2 == ex4
+*Types> ex5 == id
+
+<interactive>:71:1: error:
+    • No instance for (Eq (a0 -> a0)) arising from a use of ‘==’
+        (maybe you haven't applied a function to enough arguments?)
+    • In the expression: ex5 == id
+      In an equation for ‘it’: it = ex5 == id
+*Types> 1.2
+1.2
+it :: Fractional t => t
+*Types> 1
+1
+it :: Num t => t
+*Types> :info Num
+class Num a where
+  (+) :: a -> a -> a
+  (-) :: a -> a -> a
+  (*) :: a -> a -> a
+  negate :: a -> a
+  abs :: a -> a
+  signum :: a -> a
+  fromInteger :: Integer -> a
+  {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+        -- Defined in ‘GHC.Num’
+instance Num Word -- Defined in ‘GHC.Num’
+instance Num Integer -- Defined in ‘GHC.Num’
+instance Num Int -- Defined in ‘GHC.Num’
+instance Num Float -- Defined in ‘GHC.Float’
+instance Num Double -- Defined in ‘GHC.Float’
+*Types> :info Fractional
+class Num a => Fractional a where
+  (/) :: a -> a -> a
+  recip :: a -> a
+  fromRational :: Rational -> a
+  {-# MINIMAL fromRational, (recip | (/)) #-}
+        -- Defined in ‘GHC.Real’
+instance Fractional Float -- Defined in ‘GHC.Float’
+instance Fractional Double -- Defined in ‘GHC.Float’
+*Types> (12 :: Double)
+12.0
+it :: Double
+*Types> :type 12
+12 :: Num t => t
+*Types> take 5
+
+<interactive>:78:1: error:
+    • No instance for (Show ([a0] -> [a0]))
+        arising from a use of ‘print’
+        (maybe you haven't applied a function to enough arguments?)
+    • In a stmt of an interactive GHCi command: print it

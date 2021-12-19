@@ -1,0 +1,31 @@
+-- J’ai rajouté quelques sauts de ligne pour rendre la session plus
+-- lisible
+
+*EffetsDeBord> id' 12
+12
+*EffetsDeBord> let c = getChar'
+*EffetsDeBord> c
+a'a'
+*EffetsDeBord> :type c
+c :: IO Char
+*EffetsDeBord> echo
+aa
+*EffetsDeBord> echo2
+bbb
+*EffetsDeBord> echo2''
+b«bb»
+*EffetsDeBord> deuxCars
+ab('a','b')
+*EffetsDeBord> litLigne
+abcde
+"abcde"
+*EffetsDeBord> getCharQuand isDigit
+a*** Exception: user error (mzero)
+*EffetsDeBord> getCharQuand isDigit
+1'1'
+*EffetsDeBord> litLigne'
+abcde
+"abcde"
+*EffetsDeBord> litLigne''
+abcde
+"abcde"
