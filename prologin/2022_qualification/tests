@@ -1,0 +1,26 @@
+Test with ghci
+
+------------------
+sur_les_ondes
+------------------
+:l sur_les_ondes.hs
+surLesOndes 5 [138,13,25,333,28]
+--> "138"
+surLesOndes 3 [10,13,24]
+--> "24"
+
+------------------
+derniere_piece
+------------------
+:l derniere_piece.hs
+resoudre 5 ["blue","red","yellow","green","pink"] 3 ["blue","red","yellow"] 7 [(Structpiece 5 "blue"),(Structpiece 8 "pink"),(Structpiece 3 "pink"),(Structpiece 6 "blue"),(Structpiece 3 "green"),(Structpiece 5 "pink"),(Structpiece 5 "yellow")]
+--> "XXOXOXX\n2"
+
+------------------
+enter-the-matriks
+------------------
+:l enter_the_matriks.hs
+resoudre 105 5 [1,2,3,4,5]
+--> "1 2 3 4 5\n3 4"
+resoudre 6 2 [2,3]
+--> "3\n2"
