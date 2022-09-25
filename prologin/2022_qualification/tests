@@ -30,3 +30,13 @@ resoudre 1365 9 [1,2,3,4,5,6,7,8,9]
 "2 3 4 5 6 7 8\n4 5 6 7 8 9"
 resoudre 15 0 []
 resoudre 0 9 [1,2,3,4,5,6,7,8,9]
+
+
+------------------
+fuite_de_clavier
+------------------
+:l fuite_de_clavier.hs
+fuiteDeClavier 30 6 "G=d:Dl:T=9NS1c$9qC%,^EdUVLnU-7"
+--> 11
+fuiteDeClavier 10 4 "!84cDc1s_p"
+--> 0
