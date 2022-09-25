@@ -1,25 +1,32 @@
 -- https://prologin.org/train/2022/qualification/enter-the-matriks
-canGetSum :: Int -> [Int] -> Int -> [Int]
-canGetSum 0 _ _ = []
-canGetSum _ [] _ = []
-canGetSum goal [x] _ = if goal == x then [x] else []
-canGetSum goal xy 0 = canGetSum goal (tail xy) ((length xy)-1)
-canGetSum goal xy n = if (goal == (sum (take n xy))) then (take n xy) else (canGetSum goal xy (n-1))
+canGetSum :: Int -> [Int] -> Int -> Int -> Int -> [Int]
+canGetSum 0 _ _ _ _ = []
+canGetSum _ [] _ _ _ = []
+canGetSum goal [x] _ _ _ = if goal == x then [x] else []
+canGetSum goal liste _ 0 nbTotal = canGetSum goal (tail liste) 0 ((length liste)-1) nbTotal
+canGetSum goal liste i step nbTotal = 
+  if (goal == (sum (drop i (take step liste)))) 
+  then (drop i (take step liste)) 
+  else (if ((i+step) < nbTotal) 
+        then (canGetSum goal liste (i+1) step nbTotal) 
+        else (canGetSum goal liste 0 (step-1) nbTotal))
 
-calculMagic :: Int -> [Int] -> [Int] -> Int -> Int -> Int -> [[Int]]
-calculMagic 0 _ _ _ _ _ = [[]]
-calculMagic _ [] _ _ _ _ = [[]]
-calculMagic _ _ [] _ _ _ = [[]]
-calculMagic goal xs xy _ 0 t = calculMagic goal xs (tail xy) 0 ((length xy)-1) t
-calculMagic goal xs xy i n t = if (mod goal (sum (drop i (take n xy)))) == 0 then 
-  [(drop i (take n xy)), (canGetSum (div goal (sum (drop i (take n xy)))) xs (length xs))] else 
-    (if ((i+n) < t) then (calculMagic goal xs xy (i+1) n t) else (calculMagic goal xs xy 0 (n-1) t))
+calculMagic :: Int -> [Int]-> Int -> Int -> Int -> [[Int]]
+calculMagic 0 _ _ _ _  = [[]]
+calculMagic _ [] _ _ _ = [[]]
+calculMagic goal liste i step nbTotal = 
+  if (mod goal (sum (drop i (take step liste)))) == 0 
+  then [(drop i (take step liste)), (canGetSum (div goal (sum (drop i (take step liste)))) liste 0 nbTotal nbTotal)] 
+  else (if ((i+step) < nbTotal) 
+        then (calculMagic goal liste (i+1) step nbTotal) 
+        else (calculMagic goal liste 0 (step-1) nbTotal))
 
 listIntToString :: [Int] -> String
 listIntToString [x] = show x
 listIntToString (x:xs) = (listIntToString [x]) ++ " " ++ (listIntToString xs)
 
 magicToString :: [[Int]] -> String
+magicToString [[]] = "IMPOSSIBLE"
 magicToString [[],_] = "IMPOSSIBLE"
 magicToString [_,[]] = "IMPOSSIBLE"
 magicToString [x, y] = if (length x > length y) || (sum x) >= (sum y) then (listIntToString x) ++ "\n" ++ (listIntToString y)
@@ -33,7 +40,7 @@ resoudre :: Int     -- ^ le nombre magique
 resoudre 0 _ _ = "IMPOSSIBLE"
 resoudre _ 0 _ = "IMPOSSIBLE"
 resoudre _ _ [] = "IMPOSSIBLE"
-resoudre x n l = magicToString (calculMagic x l l 0 n n)
+resoudre x n l = magicToString (calculMagic x l 0 n n)
 
 main :: IO ()
 main = do
