@@ -1,46 +1,51 @@
 -- https://prologin.org/train/2022/qualification/enter-the-matriks
-canGetSum :: Int -> [Int] -> Int -> Int -> Int -> [Int]
-canGetSum 0 _ _ _ _ = []
-canGetSum _ [] _ _ _ = []
-canGetSum goal [x] _ _ _ = if goal == x then [x] else []
-canGetSum goal liste _ 0 nbTotal = canGetSum goal (tail liste) 0 ((length liste)-1) nbTotal
-canGetSum goal liste i step nbTotal = 
-  if (goal == (sum (drop i (take step liste)))) 
-  then (drop i (take step liste)) 
-  else (if ((i+step) < nbTotal) 
-        then (canGetSum goal liste (i+1) step nbTotal) 
-        else (canGetSum goal liste 0 (step-1) nbTotal))
+data Structmatrik = Structmatrik { firstListe  :: [Int], secondListe :: [Int]}
 
-calculMagic :: Int -> [Int]-> Int -> Int -> Int -> [[Int]]
-calculMagic 0 _ _ _ _  = [[]]
-calculMagic _ [] _ _ _ = [[]]
-calculMagic goal liste i step nbTotal = 
-  if (mod goal (sum (drop i (take step liste)))) == 0 
-  then [(drop i (take step liste)), (canGetSum (div goal (sum (drop i (take step liste)))) liste 0 nbTotal nbTotal)] 
-  else (if ((i+step) < nbTotal) 
-        then (calculMagic goal liste (i+1) step nbTotal) 
-        else (calculMagic goal liste 0 (step-1) nbTotal))
+canGetSum :: Int -> [Int] -> Int -> Int -> Int ->  [[Int]] -> Structmatrik -> Structmatrik
+canGetSum _ _ _ _ _ [] result = result
+canGetSum goal liste i 0 nbTotal (x:xs) result = canGetSum goal liste 0 nbTotal nbTotal xs result 
+canGetSum goal liste (-1) step nbTotal xs result = canGetSum goal liste (nbTotal-step+1) (step-1) nbTotal xs result 
+canGetSum goal liste i step nbTotal (x:xs) result = 
+  let resteGoal = div goal (sum x)
+      secondListe = take step (drop i liste)
+      var = (Structmatrik x secondListe)
+  in do
+    if (resteGoal == (sum secondListe)) && (countElementIn2List var result)
+    then (canGetSum goal liste i step nbTotal xs var)
+    else (canGetSum goal liste (i-1) step nbTotal (x:xs) result)
+
+calculMagic :: Int -> [Int]-> Int -> Int -> Int -> [[Int]] -> [[Int]]
+calculMagic _ _ _ 0 _ result = result
+calculMagic goal liste (-1) step nbTotal result = calculMagic goal liste (nbTotal-step+1) (step-1) nbTotal result
+calculMagic goal liste i step nbTotal result = let firstListe = (take step (drop i liste)) in do 
+  if (mod goal (sum firstListe)) == 0
+  then calculMagic goal liste (i-1) step nbTotal ([firstListe] ++ result)
+  else calculMagic goal liste (i-1) step nbTotal result
 
 listIntToString :: [Int] -> String
 listIntToString [x] = show x
 listIntToString (x:xs) = (listIntToString [x]) ++ " " ++ (listIntToString xs)
 
-magicToString :: [[Int]] -> String
-magicToString [[]] = "IMPOSSIBLE"
-magicToString [[],_] = "IMPOSSIBLE"
-magicToString [_,[]] = "IMPOSSIBLE"
-magicToString [x, y] = if (length x > length y) || (sum x) >= (sum y) then (listIntToString x) ++ "\n" ++ (listIntToString y)
-  else (listIntToString y) ++ "\n" ++ (listIntToString x)
+magicToString :: Structmatrik -> String
+magicToString (Structmatrik x y) 
+  | x == [] || y == [] = "IMPOSSIBLE"
+  | otherwise 
+    | (length x > length y) || ((length x ==  length y) && (sum x) >= (sum y)) = (listIntToString x) ++ "\n" ++ (listIntToString y)
+    | otherwise = (listIntToString y) ++ "\n" ++ (listIntToString x)
+
+countElementIn2List :: Structmatrik -> Structmatrik -> Bool
+countElementIn2List (Structmatrik x y) (Structmatrik a b)
+    | (length x + length y) > (length a + length b) = True
+    | otherwise = False
 
 resoudre :: Int     -- ^ le nombre magique
          -> Int     -- ^ la longueur du code la Matriks
          -> [Int]   -- ^ le code de la Matriks
          -> String  -- ^ TODO
 -- Les deux clés (chacune sur une ligne) ou le message "IMPOSSIBLE".
-resoudre 0 _ _ = "IMPOSSIBLE"
-resoudre _ 0 _ = "IMPOSSIBLE"
-resoudre _ _ [] = "IMPOSSIBLE"
-resoudre x n l = magicToString (calculMagic x l 0 n n)
+resoudre x n l 
+  | x < 0 || n < 2 || n > 10000 || l == [] = "IMPOSSIBLE"
+  | otherwise = magicToString (canGetSum x l 0 n n (calculMagic x l 0 n n []) (Structmatrik [] []))
 
 main :: IO ()
 main = do
