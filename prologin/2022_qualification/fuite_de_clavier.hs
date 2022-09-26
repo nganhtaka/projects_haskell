@@ -1,10 +1,5 @@
 import Data.Char (isUpper, isLower, isDigit, isPunctuation, isSymbol)
 
-hasElement :: [Char] -> (Char -> Bool) -> Bool
-hasElement xs f
-    | True `elem` (map f xs) = True
-    | otherwise             = False
-
 checkRules :: [Char] -> [Bool] -> Bool
 checkRules _ [True, True, True, True] = True
 checkRules [] bool = all (== True) bool
