@@ -29,9 +29,9 @@ listIntToString (x:xs) = (listIntToString [x]) ++ " " ++ (listIntToString xs)
 magicToString :: Structmatrik -> String
 magicToString (Structmatrik x y) 
   | x == [] || y == [] = "IMPOSSIBLE"
-  | otherwise 
-    | (length x > length y) || ((length x ==  length y) && (sum x) >= (sum y)) = (listIntToString x) ++ "\n" ++ (listIntToString y)
-    | otherwise = (listIntToString y) ++ "\n" ++ (listIntToString x)
+  | otherwise = if ((length x > length y) || ( (length x ==  length y) && (sum x) >= (sum y))) 
+    then (listIntToString x) ++ "\n" ++ (listIntToString y)
+    else (listIntToString y) ++ "\n" ++ (listIntToString x)
 
 countElementIn2List :: Structmatrik -> Structmatrik -> Bool
 countElementIn2List (Structmatrik x y) (Structmatrik a b)
@@ -44,7 +44,7 @@ resoudre :: Int     -- ^ le nombre magique
          -> String  -- ^ TODO
 -- Les deux clés (chacune sur une ligne) ou le message "IMPOSSIBLE".
 resoudre x n l 
-  | x < 0 || n < 2 || n > 10000 || l == [] = "IMPOSSIBLE"
+  | x < 0 || n < 2 || n > 10000 || l == [] || n /= length l = "IMPOSSIBLE"
   | otherwise = magicToString (canGetSum x l 0 n n (calculMagic x l 0 n n []) (Structmatrik [] []))
 
 main :: IO ()

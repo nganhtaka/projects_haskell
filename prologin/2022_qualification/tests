@@ -44,3 +44,13 @@ fuiteDeClavier 30 6 "G=d:Dl:T=9NS1c$9qC%,^EdUVLnU-7"
 --> 11
 fuiteDeClavier 10 4 "!84cDc1s_p"
 --> 0
+
+
+------------------
+coffre_fort
+------------------
+:l coffre_fort.hs
+calculerSignaux 6 5 5 [4,9,7,2,3,0] [(Fil 0 1), (Fil 1 3), (Fil 1 2), (Fil 2 4), (Fil 4 5)] [(Question 0 3), (Question 1 3), (Question 0 4), (Question 0 5), (Question 1 2)]
+--> "72\n18\n756\n0\n63"
+calculerSignaux 12 11 5 [1671404010,1671404009,1371404010,1,3,8,2,7,10,4,0,6] [(Fil 0 1),(Fil 2 0),(Fil 3 2),(Fil 3 4),(Fil 9 3),(Fil 5 3),(Fil 7 5),(Fil 5 6),(Fil 8 4),(Fil 9 10),(Fil 11 10)] [(Question 1 8),(Question 7 7),(Question 6 8),(Question 9 7),(Question 2 10)]
+--> "385444061\n7\n480\n224\n0"
