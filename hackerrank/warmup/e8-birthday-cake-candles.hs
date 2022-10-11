@@ -6,7 +6,6 @@ import Control.Monad
 import Data.Array
 import Data.Bits
 import Data.List
-import Data.List.Split
 import Data.Set
 import Data.Text
 import Debug.Trace
@@ -21,13 +20,12 @@ import System.IO.Unsafe
 -- The function accepts INTEGER_ARRAY candles as parameter.
 --
 
-birthdayCakeCandles :: Int -> [Int] -> [Int] -> [Int]
-birthdayCakeCandles 0 _ x = x
-birthdayCakeCandles n (ca:candles) [nb,maxC] =
-    if (ca > maxC) then birthdayCakeCandles (n-1) candles [1,ca] else
-        if (ca == maxC) then birthdayCakeCandles (n-1) candles [(nb+1),maxC] else
-            birthdayCakeCandles (n-1) candles [nb,maxC]
-
+birthdayCakeCandles :: [Int] -> Int
+birthdayCakeCandles [] = 0
+birthdayCakeCandles [x] = 1
+birthdayCakeCandles (ca1:ca2:candles) 
+    | ca1 == ca2 = 1 + (birthdayCakeCandles (ca2:candles))
+    | otherwise = 1
 
 lstrip = Data.Text.unpack . Data.Text.stripStart . Data.Text.pack
 rstrip = Data.Text.unpack . Data.Text.stripEnd . Data.Text.pack
@@ -44,7 +42,7 @@ main = do
 
     let candles = Data.List.map (read :: String -> Int) . Data.List.words $ rstrip candlesTemp
 
-    let result = Data.List.head (birthdayCakeCandles (read candlesCountTemp :: Int) candles [0,0])
+    let result = birthdayCakeCandles $ Data.List.reverse $ Data.List.sort candles
     
     hPutStrLn fptr $ show result
 
