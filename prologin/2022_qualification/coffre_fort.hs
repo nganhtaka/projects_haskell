@@ -17,23 +17,37 @@ data Puce = Puce { name::Int, signal:: Int}
 
 data Node = Node { parent :: Puce, child :: [Int]}
 
+-- showFil (Fil puce1 puce2) = show puce1 ++ "," ++ show puce2
+
+-- findAPath [] _ _ _ listOkA listOkB = listOkA ++ [(Fil 0 0)] ++ listOkB
+-- findAPath ((Fil puce1 puce2):xs) puceA puceB listKo listOkA listOkB
+--   | ((puce1 == puceA) && (puce2 == puceB)) || ((puce1 == puceB) && (puce2 == puceA)) = [(Fil puce1 puce2)]
+--   | (puce1 == puceA) || (puce2 == puceA) = findAPath xs puceA puceB listKo ([(Fil puce1 puce2)]++listOkA) listOkB
+--   | (puce1 == puceB) || (puce2 == puceB) = findAPath xs puceA puceB listKo listOkA ([(Fil puce1 puce2)]++listOkB)
+--   | otherwise = findAPath xs puceA puceB ([(Fil puce1 puce2)]++listKo) listOkA listOkB
+
+
+
+
 haveTheSameElement :: [Int] -> [Int] -> [Int] -> [Int]
 haveTheSameElement [] _ result = result
 haveTheSameElement (x:xs) ys result = if (elem x ys) then haveTheSameElement xs ys (result ++ [x]) else haveTheSameElement xs ys result
 
-chercheAChemin :: Question -> [Node] -> [Int] -> Int -> Int
-chercheAChemin (Question puceA puceB) tree chemin result = 
-  let (Node (Puce puce1 signal1) listPuces1) = head (drop puceA tree)
-      (Node (Puce puce2 signal2) listPuces2) = head (drop puceB tree)
-  in do 
-    if signal1 == 0 || signal2 == 0 then 0 else
-      if elem puce1 chemin then 1671404011 else
-        if elem puce1 listPuces2 then (mod (signal1*signal2*result) 1671404011)
-            else let listCommun = (haveTheSameElement listPuces1 listPuces2 []) in do
-              if length listCommun > 0 then 
-                let (Node (Puce _ signal11) _) = head (drop (head listCommun) tree)
-                in do (mod (signal1 * signal11 * signal2 * result) 1671404011)
-              else minimum (map (\x -> chercheAChemin (Question x puceB) tree (chemin++[puce1]) (mod (result*signal1) 1671404011)) listPuces1)
+--chercheAChemin :: Question -> [Node] -> [Int] -> Int -> Int
+chercheAChemin (Question puceA puceB) tree pathLeft pathRight
+ result = 
+
+  -- let (Node (Puce puce1 signal1) listPuces1) = head (drop puceA tree)
+  --     (Node (Puce puce2 signal2) listPuces2) = head (drop puceB tree)
+  -- in do 
+  --   if signal1 == 0 || signal2 == 0 then 0 else
+  --     if elem puce1 chemin then 1671404011 else
+  --       if elem puce1 listPuces2 then (mod (signal1*signal2*result) 1671404011)
+  --           else let listCommun = (haveTheSameElement listPuces1 listPuces2 []) in do
+  --             if length listCommun > 0 then 
+  --               let (Node (Puce _ signal11) _) = head (drop (head listCommun) tree)
+  --               in do (mod (signal1 * signal11 * signal2 * result) 1671404011)
+  --             else minimum (map (\x -> chercheAChemin (Question x puceB) tree (chemin++[puce1]) (mod (result*signal1) 1671404011)) listPuces1)
 
 
 createTree :: [Fil] -> [Node] -> [Node]
