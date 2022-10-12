@@ -18,23 +18,26 @@ import System.IO.Unsafe
 --
 -- The function is expected to return an INTEGER.
 -- The function accepts 2D_INTEGER_ARRAY s as parameter.
---
--- get max 8
---getMax 0 s res = res
 
-getAllSum _ (-1) _ res = res
-getAllSum i j (x:xs) res = 
-    let sumHorizontal = (Data.List.take 3 res)
-        sumVertical = (Data.List.take 3 (Data.List.drop 3 res))
-        [d1,d2] = (Data.List.take 2 (Data.List.drop 6 res))
-        newRes = (Data.List.take i sumHorizontal) ++ [(sum x)] ++ (Data.List.drop (i+1) sumHorizontal) 
-                ++ (Data.List.zipWith (+) x sumVertical)
-                ++ [(d1 + (Data.List.head (Data.List.drop i x))), (d2 + (Data.List.head (Data.List.drop j x)))]
-    in do getAllSum (i+1) (j-1) xs newRes
+squaresGenerated = Data.List.filter (\x -> getAllSum x == [15,15,15,15,15,15,15,15]) $ Data.List.map listToSquare $ Data.List.permutations [1,2,3,4,5,6,7,8,9]
 
+listToSquare x = [Data.List.take 3 x, Data.List.take 3 $ Data.List.drop 3 x, Data.List.take 3 $ Data.List.drop 6 x]
 
-formingMagicSquare s = 1
-    -- Write your code here
+getSumHorizontal x = [Data.List.sum $ x !! 0, Data.List.sum $ x !! 1, Data.List.sum $ x !! 2]
+getSumVertical x = getSumHorizontal $ Data.List.transpose x
+
+getSumDiagonalLeft x = Data.List.sum $ Data.List.zipWith (\x y -> x !! y) x [0,1,2]
+getSumDiagonalRight x = Data.List.sum $ Data.List.zipWith (\x y -> x !! y) x [2,1,0]
+
+getAllSum x = getSumHorizontal x ++ getSumVertical x ++ [getSumDiagonalLeft x, getSumDiagonalRight x]
+
+-- [[5,3,4],[1,5,8],[6,4,2]] -- [[6,1,8],[7,5,3],[2,9,4]]
+
+compareToGetPoint [] [] = 0
+compareToGetPoint (s1:square1) (s2:square2) =
+    (Data.List.sum $ Data.List.zipWith (\x y -> abs (x-y)) s1 s2) + (compareToGetPoint square1 square2)
+
+formingMagicSquare s = Data.List.minimum $ Data.List.map (compareToGetPoint s) $ squaresGenerated 
 
 lstrip = Data.Text.unpack . Data.Text.stripStart . Data.Text.pack
 rstrip = Data.Text.unpack . Data.Text.stripEnd . Data.Text.pack
